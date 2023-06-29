@@ -26,11 +26,12 @@ jobs:
       #   run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
       - run: npm install
       - run: npm run build
-      - run: cp .next ./build/_next
+      - run: mkdir dist
+      - run: cp -r .next dist/_next
       - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-southeast-1
       - run: aws s3 rm s3://simplize-fe-test-github-action --recursive
-      - run: aws s3 sync ./build s3://simplize-fe-test-github-action
+      - run: aws s3 sync dist s3://simplize-fe-test-github-action
