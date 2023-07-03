@@ -26,7 +26,7 @@ jobs:
       #   run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
       - run: npm install
       - run: npm run build
-      - run: mkdir dist
+      - run: mkdir -r dist/_next
       - run: cp -r .next/static dist/_next/static
       - uses: aws-actions/configure-aws-credentials@v1
         with:
