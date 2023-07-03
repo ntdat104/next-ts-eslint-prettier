@@ -36,3 +36,4 @@ jobs:
       # - run: aws s3 rm s3://simplize-fe-test-github-action --recursive --dryrun --exclude "*" --include "_next/*"
       - run: aws s3 sync dist s3://simplize-fe-test-github-action --dryrun --exclude "*" --include "_next/*"
       - run: aws s3 sync dist s3://simplize-fe-test-github-action --dryrun --exclude "*" --include "_next/*" --delete
+      
