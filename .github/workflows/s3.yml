@@ -36,3 +36,11 @@ jobs:
       - run: aws s3 rm s3://simplize-fe-test-github-action --recursive --exclude "*" --include "_next/*"
       - run: aws s3 sync dist s3://simplize-fe-test-github-action --exclude "*" --include "_next/*"
       # - run: aws s3 sync dist s3://simplize-fe-test-github-action --exclude "*" --include "_next/*" --delete
+      
+      - name: Invalidate CloudFront cache
+        run: |
+          aws configure set preview.cloudfront true
+          aws cloudfront create-invalidation --distribution-id your-cloudfront-distribution-id --paths "/*"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
